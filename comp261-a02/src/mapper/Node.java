@@ -172,12 +172,12 @@ public class Node {
 			}
 			g.fillRect((int) p.getX()-dotSize/2, (int) p.getY()-dotSize/2, dotSize, dotSize);
 		} else if (isPathNode == 1) { // is start path node
-			Image img1 = Toolkit.getDefaultToolkit().getImage("/Users/diego/Documents/Victoria/Git/comp261/comp261-a02/src/mapper/start.gif");
+			Image img1 = Toolkit.getDefaultToolkit().getImage("/Users/diego/Documents/Victoria/COMP261_2015T1/GitHub/comp261-a02/src/mapper/start.gif");
 			//	    Image img1 = Toolkit.getDefaultToolkit().getImage("./start.gif");
 			g2.drawImage(img1, (int) p.getX()-15, (int) p.getY()-50, observer);		
 			g2.finalize();
 		} else if (isPathNode == 2) { // is arrival path node 
-			Image img1 = Toolkit.getDefaultToolkit().getImage("/Users/diego/Documents/Victoria/Git/comp261/comp261-a02/src/mapper/arrival.gif");
+			Image img1 = Toolkit.getDefaultToolkit().getImage("/Users/diego/Documents/Victoria/COMP261_2015T1/GitHub/comp261-a02/src/mapper/arrival.gif");
 			//		Image img1 = Toolkit.getDefaultToolkit().getImage("./arrival.gif");
 			g2.drawImage(img1, (int) p.getX()-15, (int) p.getY()-50, observer);		
 			g2.finalize();
