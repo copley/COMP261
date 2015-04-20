@@ -32,17 +32,7 @@ public class Model {
 	public Set<Polygon> getPolygons() {
 		return polygons;
 	}
-
-	public void zoomIn() {
-		for (Polygon p : polygons) {
-			p.zoom(ZOOOM_RATE);
-		}
-	}
-
-	public void zoomOut() {
-		for (Polygon p : polygons) {
-			p.zoom(1/ZOOOM_RATE);
-		}
-	}	
+	
+	
 	
 }

@@ -9,6 +9,7 @@ import java.io.IOException;
 
 /**
  * My first 3D renderer. Based on simple Z-buffer algorithm
+ * 
  * @author Diego Trazzi
  */
 public class RenderGUI extends GUI {
@@ -38,16 +39,16 @@ public class RenderGUI extends GUI {
 	@Override
 	protected void onKeyPress(KeyEvent ev) {
 	}
-	
+
 	@Override
 	protected void onMouseScroll(MouseWheelEvent e) {
 		int notches = e.getWheelRotation();
 		System.out.println(notches);
 		if (notches > 0) {
-			model.zoomOut();
+			// model.zoomOut();
 			render();
 		} else {
-			model.zoomIn();
+			// model.zoomIn();
 			render();
 		}
 	}
@@ -57,16 +58,12 @@ public class RenderGUI extends GUI {
 	 */
 	@Override
 	protected BufferedImage render() {
-
 		// Initialize Z Buffer
 		Color[][] colorBuffer = new Color[CANVAS_WIDTH][CANVAS_HEIGHT];
 		double[][] depthBuffer = new double[CANVAS_WIDTH][CANVAS_HEIGHT];
-
 		for (int x = 0; x < colorBuffer.length; x++) {
 			for (int y = 0; y < colorBuffer[0].length; y++) {
 				colorBuffer[x][y] = Color.gray; // Initialize colors to grey
-				// float ramp = (float) Math.sin(x + Math.pow(y,1))*255;
-				// colorBuffer[x][y] = new Color(255, ramp, 255);
 			}
 		}
 		for (int x = 0; x < depthBuffer.length; x++) {
@@ -74,19 +71,27 @@ public class RenderGUI extends GUI {
 				depthBuffer[x][y] = Integer.MAX_VALUE; // Initialize depths to infinite
 			}
 		}
-
 		// Render polygons
 		if (model != null) {
 			for (Polygon p : model.getPolygons()) {
-				for (int i = 0; i < depthBuffer.length; i++) {
-					for (int j = 0; j < depthBuffer[0].length; j++) {
-						colorBuffer[i][j] = p.getColor();
+				EdgeList[] edgelist = p.edgeList();
+				Color c = p.getColor();
+				for (int j = 0; j < edgelist.length && edgelist[j] != null; j++) {
+					int y = j;
+					int x = Math.round(edgelist[j].getLeftX());
+					int z = Math.round(edgelist[j].getLeftZ());
+					int mz = Math.round((edgelist[j].getRightZ() - edgelist[j].getLeftZ()) / (edgelist[j].getRightX() - edgelist[j].getLeftX()));
+					while (x <= edgelist[j].getRightX()) {
+						if (z < depthBuffer[x][y]) {
+							depthBuffer[x][y] = z;
+							colorBuffer[x][y] = c;
+						}
+						x++;
+						z += mz;
 					}
 				}
 			}
 		}
-
-		// render the bitmap to the image so it can be displayed (and saved)
 		return convertBitmapToImage(colorBuffer);
 	}
 
@@ -103,5 +108,4 @@ public class RenderGUI extends GUI {
 	public static void main(String[] args) {
 		new RenderGUI();
 	}
-
 }
