@@ -1,7 +1,7 @@
 public class EdgeBounds {
 	
-	private Edge left = new Edge(0, Integer.MAX_VALUE, 0);
-	private Edge right = new Edge(0, Integer.MIN_VALUE, 0);
+	private Edge left = new Edge(0, Integer.MAX_VALUE, 0, null);
+	private Edge right = new Edge(0, Integer.MIN_VALUE, 0, null);
 	
 	/*
 	 * Getters

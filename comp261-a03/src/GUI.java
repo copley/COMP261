@@ -21,7 +21,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.border.Border;
-import javax.swing.event.*;
 
 /**
  * A simple GUI, similar to the one in assignments 1 and 2, that you can base your renderer off. It is abstract, and there are three methods you need to implement: onLoad, onKeyPress, and render. You
@@ -45,11 +44,11 @@ public abstract class GUI {
 	 * Is called every time the user adds a light pressing on the add light button
 	 */
 	protected abstract void onLightAdd();
-	
+		
 	/**
 	 * Is called every time the user makes changes on the slider
 	 */
-	protected abstract void onSliderChange(ChangeEvent e);
+//	protected abstract void onGammaSliderChange(ChangeEvent e);
 	
 	/**
 	 * Is called every time the drawing canvas is drawn. This should return a BufferedImage that is your render of the scene.
@@ -71,6 +70,12 @@ public abstract class GUI {
 
 		return new int[] { red.getValue(), green.getValue(), blue.getValue() };
 	}
+	
+	public int getSpecPow() {
+
+		return specPower.getValue() ;
+	}
+	
 	public static final int CANVAS_WIDTH = 600;
 	public static final int CANVAS_HEIGHT = 600;
 	// --------------------------------------------------------------------
@@ -82,7 +87,7 @@ public abstract class GUI {
 	private final JSlider red = new JSlider(JSlider.HORIZONTAL, 0, 255, 128);
 	private final JSlider green = new JSlider(JSlider.HORIZONTAL, 0, 255, 128);
 	private final JSlider blue = new JSlider(JSlider.HORIZONTAL, 0, 255, 128);
-	private final JSlider gamma = new JSlider(JSlider.HORIZONTAL, 0, 2, 1);
+	private final JSlider specPower = new JSlider(JSlider.HORIZONTAL, 1, 100, 15);
 	private static final Dimension DRAWING_SIZE = new Dimension(CANVAS_WIDTH, CANVAS_HEIGHT);
 	private static final Dimension CONTROLS_SIZE = new Dimension(150, 600);
 	private static final Font FONT = new Font("Courier", Font.BOLD, 36);
@@ -169,7 +174,7 @@ public abstract class GUI {
 		red.setBackground(new Color(230, 50, 50));
 		green.setBackground(new Color(50, 230, 50));
 		blue.setBackground(new Color(50, 50, 230));
-		gamma.setBackground(new Color(230, 230, 230));
+		specPower.setBackground(new Color(230, 230, 230));
 		JPanel sliderparty = new JPanel();
 		sliderparty.setLayout(new BoxLayout(sliderparty, BoxLayout.PAGE_AXIS));
 		sliderparty.setBorder(BorderFactory.createTitledBorder("Ambient Light"));
@@ -178,8 +183,8 @@ public abstract class GUI {
 		sliderparty.add(blue);
 		JPanel sliderGamma = new JPanel();
 		sliderGamma.setLayout(new BoxLayout(sliderGamma, BoxLayout.PAGE_AXIS));
-		sliderGamma.setBorder(BorderFactory.createTitledBorder("Light Gamma"));
-		sliderGamma.add(gamma);
+		sliderGamma.setBorder(BorderFactory.createTitledBorder("Specular power"));
+		sliderGamma.add(specPower);
 		// this is not a best-practices way of doing key listening; instead you
 		// should use either a KeyListener or an InputMap/ActionMap combo. but
 		// this method neatly avoids any focus issues (KeyListener) and requires
@@ -210,38 +215,6 @@ public abstract class GUI {
 		controls.add(Box.createRigidArea(new Dimension(0, 15)));
 		controls.add(sliderparty);
 		controls.add(sliderGamma);
-		red.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				onSliderChange(e);
-				System.out.println("RED changed");
-			}
-		});
-		green.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				onSliderChange( e);
-				System.out.println("GREEN changed");
-			}
-		});
-		blue.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				onSliderChange( e);
-				System.out.println("BLUE changed");
-			}
-		});
-		gamma.addChangeListener(new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				onSliderChange( e);
-				System.out.println("GAMMA changed");
-			}
-		});
 		// if i were going to add more GUI components, i'd do it here.
 		controls.add(Box.createVerticalGlue());
 		// put it all together.
