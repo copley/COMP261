@@ -7,7 +7,7 @@
 public class Vector3D {
 	public final float x;
 	public final float y;
-	public float z;
+	public final float z;
 	public final float mag;
 
 	/**
@@ -49,17 +49,7 @@ public class Vector3D {
 	public Vector3D plus(Vector3D other) {
 		return new Vector3D(x + other.x, y + other.y, z + other.z);
 	}
-	
-	public Vector3D mult(float v) {
-		Vector3D target = new Vector3D(x*v, y*v, z*v);
-		return target;
-	}
-	
-	public Vector3D mult(Vector3D other) {
-		Vector3D target = new Vector3D(x*other.x, y*other.y, z*other.z);
-		return target;
-	}
-	
+
 	/**
 	 * Returns the float that is the dot product of this vector and the other
 	 * vector.
@@ -95,3 +85,5 @@ public class Vector3D {
 		return ans.toString();
 	}
 }
+
+// code for COMP261 assignments

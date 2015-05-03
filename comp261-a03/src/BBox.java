@@ -1,74 +1,79 @@
 public class BBox {
 
-	private float x;
-	private float y;
-	private float width;
-	private float height;
+	private float minX;
+	private float minY;
+	private float minZ;
+	private float maxX;
+	private float maxY;
+	private float maxZ;
 
-	public BBox(float x, float y, float w, float h) {
-		this.x = x;
-		this.y = y;
-		this.width = w;
-		this.height = h;
+	public BBox(float minX, float maxX, float minY, float maxY, float minZ, float maxZ) {
+
+		this.minX = minX;
+		this.minY = minY;
+		this.minZ = minZ;
+		this.maxX = maxX;
+		this.maxY = maxY;
+		this.maxZ = maxZ;
 	}
 
-	/**
-	 * @return the x
-	 */
-	public float getX() {
-		return x;
+	public float getMinX() {
+
+		return minX;
 	}
 
-	/**
-	 * @param x
-	 *            the x to set
-	 */
-	public void setX(float x) {
-		this.x = x;
+	public void setMinX(float minX) {
+
+		this.minX = minX;
 	}
 
-	/**
-	 * @return the y
-	 */
-	public float getY() {
-		return y;
+	public float getMinY() {
+
+		return minY;
 	}
 
-	/**
-	 * @param y
-	 *            the y to set
-	 */
-	public void setY(float y) {
-		this.y = y;
+	public void setMinY(float minY) {
+
+		this.minY = minY;
 	}
 
-	/**
-	 * @return the width
-	 */
-	public float getWidth() {
-		return width;
+	public float getMinZ() {
+
+		return minZ;
 	}
 
-	/**
-	 * @param width
-	 *            the width to set
-	 */
-	public void setWidth(float width) {
-		this.width = width;
+	public void setMinZ(float minZ) {
+
+		this.minZ = minZ;
 	}
 
-	/**
-	 * @return the height
-	 */
-	public float getHeight() {
-		return height;
+	public float getMaxX() {
+
+		return maxX;
 	}
 
-	/**
-	 * @param height
-	 *            the height to set
-	 */
-	public void setHeight(float height) {
-		this.height = height;
+	public void setMaxX(float maxX) {
+
+		this.maxX = maxX;
+	}
+
+	public float getMaxY() {
+
+		return maxY;
+	}
+
+	public void setMaxY(float maxY) {
+
+		this.maxY = maxY;
+	}
+
+	public float getMaxZ() {
+
+		return maxZ;
+	}
+
+	public void setMaxZ(float maxZ) {
+
+		this.maxZ = maxZ;
 	}
 }

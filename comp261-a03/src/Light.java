@@ -24,10 +24,6 @@ public class Light {
 		this.blue = 255;
 	}
 
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Light [direction=" + direction + ", intensity=" + intensity + ", red=" + red + ", green=" + green + ", blue=" + blue + "]";

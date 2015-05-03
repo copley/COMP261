@@ -1,0 +1,29 @@
+\documentclass[11pt, oneside]{article} % letter, article, report
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+
+\title{Comp 261 A03 Report}
+\author{Diego Trazzi}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+This assignment has been rather challenging but I relive I have accomplished most of the requirements. In the following section I will discuss details about the code and list few bugs which I have identified thought the process of testing and coding.
+\section{Code implementation}
+The algorithm implementation took several days, including nights, but I managed to achieve most of the requirements. I subdivided the code in classes following a topological distribution of the various attributes. The Main, extended from GUI class,  class contains the method used for calling render process and handling the user input.\\ In addition to this, I have created classes for the Edges and Polygons, which help in dividing the large amount of code which each one has to accomplish.\\ There are also classes for Lights, Bounding Boxes and Pixels, which contains both colour and depth information. In previous version of the project I also had a class for the 3D Model and lot of private methods with getter and setter, but in more recent version I decided to simplify the code removing some unnecessary over complications. I therefore replaced ListArrays with standard array wherever possible and removed the Model class and allowed most of the methods to be public, to simplify the code and speed up the drawing.
+%\subsection{}
+\section{Bugs}
+\begin{itemize}
+\item The interface doesn't update when changing sliders values. Only works when using keys to refresh the 
+image
+\item The Phong model doesn't work entirely. I was able to partially implement specular contribution thou, which allows me to add reflectivity and shininess to the 3D models
+\end{itemize}
+\section{References}
+To implement additional requirements for the Challenge part I have conducted some online research on publication journals and online. Among several results I found this online resource \cite{PhongShading} and this article \cite{Phong:1975aa} especially useful
+\bibliographystyle{apalike}
+\bibliography{References}
+
+\end{document}
