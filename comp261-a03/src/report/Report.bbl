@@ -1,0 +1,12 @@
+\begin{thebibliography}{}
+
+\bibitem[Guo, ]{PhongShading}
+Guo, X.~J.
+\newblock Phong shading and gouraud shading.
+
+\bibitem[Phong, 1975]{Phong:1975aa}
+Phong, B.~T. (1975).
+\newblock Illumination for computer generated pictures.
+\newblock {\em Commun. ACM}, 18(6):311--317.
+
+\end{thebibliography}
