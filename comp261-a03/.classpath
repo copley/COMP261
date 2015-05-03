@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-<<<<<<< HEAD
-	<classpathentry excluding="ImageExample.java|Model.java|Vertex.java|EdgeList.java|Light.java" kind="src" path="src"/>
-=======
-	<classpathentry excluding="ImageExample.java|TMP.java|TMP2RENDER.java|RenderPipeline.java" kind="src" path="src"/>
->>>>>>> d771c88ca6136e70550d55aaba2fd9ece834914e
+	<classpathentry excluding="ImageExample.java|Light.java" kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
