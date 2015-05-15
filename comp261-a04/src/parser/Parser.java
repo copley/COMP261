@@ -1,12 +1,12 @@
 package parser;
 
+import interfaces.RobotNode;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.regex.*;
 import javax.swing.JFileChooser;
 import util.ProgramNode;
-import util.RobotNode;
 
 /**
  * The parser and interpreter. The top level parse function, a main method for testing, and several utility methods are provided. You need to implement parseProgram and all the rest of the parser.
@@ -15,11 +15,12 @@ public class Parser {
 	
 	// Statement patterns
 	public static Pattern ACTION = Pattern.compile("move|takeFuel|turnL|turnR|wait|turnAround|shieldOn|shieldOff");
-	public static Pattern LOOP = Pattern.compile("loop");
-	public static Pattern IF = Pattern.compile("if");
-	public static Pattern WHILE = Pattern.compile("while");
 	public static Pattern VAR  = Pattern.compile("\\$[A-Za-z][A-Za-z0-9]*");
 
+	// Logic patterns
+	public static Pattern IF = Pattern.compile("if");
+	public static Pattern LOOP = Pattern.compile("loop");
+	public static Pattern WHILE = Pattern.compile("while");
 	
 	// Action patterns
 	public static Pattern MOVE = Pattern.compile("move");
@@ -31,8 +32,14 @@ public class Parser {
 	public static Pattern SHIELDON = Pattern.compile("shieldOn");
 	public static Pattern SHIELDOFF = Pattern.compile("shieldOff");
 	
-//	// Generic beheaviour nodes
-//	public static Pattern CONDITION = Pattern.compile("and|or|not|lt|gt|eq");
+	// Condition nodes
+	public static Pattern CONDITION = Pattern.compile("and|or|not|lt|gt|eq");
+	public static Pattern LESSTHEN = Pattern.compile("lt");
+	public static Pattern GREATERTHEN = Pattern.compile("gt");
+	public static Pattern EQUAL = Pattern.compile("eq");
+	public static Pattern AND = Pattern.compile("and");
+	public static Pattern OR = Pattern.compile("or");
+	public static Pattern NOT = Pattern.compile("not");
 
 	// Expression nodes
 	public static Pattern NUMPAT = Pattern.compile("-?\\d+");  // ("-?(0|[1-9][0-9]*)");

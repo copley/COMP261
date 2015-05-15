@@ -1,4 +1,5 @@
 package robot;
+import interfaces.RobotNode;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -13,7 +14,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import javax.imageio.ImageIO;
-import util.RobotNode;
 import world.World;
 import world.WorldComponent;
 

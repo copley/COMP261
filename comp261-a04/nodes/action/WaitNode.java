@@ -1,13 +1,15 @@
 package action;
 
+import interfaces.RobotExpNode;
+import interfaces.RobotNode;
 import java.util.Scanner;
+import expression.ExpressionNode;
 import parser.Parser;
 import robot.Robot;
-import util.RobotNode;
 
 public class WaitNode implements RobotNode {
 
-	private RobotNode expressionNode = null;
+	private RobotExpNode expressionNode;
 
 	@Override
 	public void execute(Robot robot) {
@@ -16,7 +18,10 @@ public class WaitNode implements RobotNode {
 			robot.idleWait();
 		} else {
 			expressionNode.execute(robot);
-			// IMPLEMENT CODE HERE: should retrive the expression form the epxressionNode and then use it for wait
+			int value = expressionNode.getValue();
+			for (int i = 0; i < value; i++) {
+				robot.idleWait();
+			}
 		}
 	}
 
@@ -26,17 +31,18 @@ public class WaitNode implements RobotNode {
 		if (!Parser.gobble(Parser.WAIT, scan)) {
 			Parser.fail("FAIL: Expecting " + Parser.WAIT.toString(), scan);
 		}
-		// if (scan.hasNext(Parser.OPENP)){ // has "("
-		// Parser.gobble(Parser.OPENP, scan);
-		// }
-		//
-		// // parse exp (and gobble)
-		// expressionNode = new ExpressionNode().parse(scan);
-		//
-		// // close parenthesis
-		// if (scan.hasNext(Parser.CLOSEP)){ // has ")"
-		// Parser.gobble(Parser.CLOSEP, scan);
-		// }
+		if (scan.hasNext(Parser.OPENP)) {
+			// has open parenthesis -> gobble "("
+			Parser.gobble(Parser.OPENP, scan);
+			// new expression node -> parse and gobble
+			expressionNode = new ExpressionNode();
+			expressionNode.parse(scan);
+			if (scan.hasNext(Parser.CLOSEP)) {
+				Parser.gobble(Parser.CLOSEP, scan);
+			} else {
+				Parser.fail("Fail: expected "+Parser.CLOSEP, scan);
+			}
+		}
 		return this;
 	}
 

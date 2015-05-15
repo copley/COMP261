@@ -1,8 +1,8 @@
 package logic;
 
+import interfaces.RobotNode;
 import java.util.Scanner;
 import robot.Robot;
-import util.RobotNode;
 
 
 public class IfNode implements RobotNode {

@@ -1,9 +1,9 @@
 package util;
 
+import interfaces.RobotNode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import util.RobotNode;
 import robot.Robot;
 
 public class ProgramNode implements RobotNode {

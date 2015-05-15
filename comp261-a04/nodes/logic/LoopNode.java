@@ -1,9 +1,9 @@
 package logic;
 
+import interfaces.RobotNode;
 import java.util.Scanner;
 import parser.Parser;
 import util.BlockNode;
-import util.RobotNode;
 import robot.Robot;
 
 public class LoopNode implements RobotNode {
@@ -21,22 +21,14 @@ public class LoopNode implements RobotNode {
 	@Override
 	public RobotNode parse(Scanner scan) {
 
-		// Check for "loop"
+		// "loop"
 		if (!Parser.gobble(Parser.LOOP, scan)) {
 			Parser.fail("FAIL: Expecting " + Parser.LOOP.toString(), scan);
 		}
-		// Check for open braces
-		if (!Parser.gobble(Parser.OPENBRACE, scan)) {
-			Parser.fail("FAIL: Expecting " + Parser.OPENBRACE.toString(), scan);
-		}
-		// Read the block to loop
+		
+		// "BLOCK"
 		blockNode = new BlockNode();
 		blockNode.parse(scan);
-		// Check for close braces
-		if (!Parser.gobble(Parser.CLOSEBRACE, scan)) {
-			Parser.fail("FAIL: Expecting dsds" + Parser.CLOSEBRACE.toString(), scan);
-		}
-		// Parse the node and return
 		return blockNode;
 	}
 

@@ -1,13 +1,14 @@
 package expression;
 
+import interfaces.RobotExpNode;
+import interfaces.RobotNode;
 import java.util.Scanner;
 import parser.Parser;
 import robot.Robot;
 import sensor.SensorNode;
-import util.RobotNode;
 
 
-public class ExpressionNode implements RobotNode {
+public class ExpressionNode implements RobotExpNode {
 
 	RobotExpNode nextNode = null;
 	
@@ -33,7 +34,7 @@ public class ExpressionNode implements RobotNode {
 		return this;
 	}
 
-	public String getValue() {
+	public int getValue() {
 		return nextNode.getValue();
 	}
 	

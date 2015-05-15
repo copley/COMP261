@@ -1,8 +1,9 @@
 package expression;
 
+import interfaces.RobotExpNode;
+import interfaces.RobotNode;
 import java.util.Scanner;
 import robot.Robot;
-import util.RobotNode;
 
 
 public class OpNode implements RobotExpNode {
@@ -21,9 +22,9 @@ public class OpNode implements RobotExpNode {
 	}
 
 	@Override
-	public String getValue() {
+	public int getValue() {
 
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 }

@@ -1,5 +1,6 @@
 package util;
 
+import interfaces.RobotNode;
 import java.util.Scanner;
 import robot.Robot;
 

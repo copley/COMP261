@@ -1,5 +1,6 @@
 package world;
 
+import interfaces.RobotNode;
 import java.awt.Point;
 import java.io.File;
 import java.util.Collections;
@@ -9,7 +10,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import parser.Parser;
 import robot.Robot;
 import robot.RobotInterruptedException;
-import util.RobotNode;
 
 public class World {
 	

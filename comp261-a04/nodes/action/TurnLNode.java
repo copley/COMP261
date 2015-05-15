@@ -1,9 +1,9 @@
 package action;
 
+import interfaces.RobotNode;
 import java.util.Scanner;
 import parser.Parser;
 import robot.Robot;
-import util.RobotNode;
 
 public class TurnLNode implements RobotNode {
 

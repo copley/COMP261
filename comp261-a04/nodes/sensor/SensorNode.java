@@ -1,9 +1,9 @@
 package sensor;
 
+import interfaces.RobotExpNode;
+import interfaces.RobotNode;
 import java.util.Scanner;
-import expression.RobotExpNode;
 import robot.Robot;
-import util.RobotNode;
 
 
 public class SensorNode implements RobotExpNode {
@@ -22,9 +22,9 @@ public class SensorNode implements RobotExpNode {
 	}
 
 	@Override
-	public String getValue() {
+	public int getValue() {
 
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 }
