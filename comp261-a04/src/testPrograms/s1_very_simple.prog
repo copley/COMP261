@@ -1,0 +1,3 @@
+while(gt(fuelLeft, 0)){
+		wait;
+	}

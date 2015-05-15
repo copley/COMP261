@@ -1,5 +1,5 @@
 package robot;
-import interfaces.RobotNode;
+import interfaces.RobotProgramNode;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -279,7 +279,7 @@ public class Robot {
     private World world;
     private Point otherRobotPos;
     private List<Point> barrels = new ArrayList<Point>();
-    private RobotNode program; 
+    private RobotProgramNode program; 
 
     private boolean shield, dead, finished, cancelled;
     private int fuel = 100, targetFuel;
@@ -309,7 +309,7 @@ public class Robot {
     /**
      * Set the program of this robot, if the controller represents is a valid program
      */
-    public void setProgram(RobotNode prog){
+    public void setProgram(RobotProgramNode prog){
 	program = prog;
     }
 

@@ -1,6 +1,6 @@
 package parser;
 
-import interfaces.RobotNode;
+import interfaces.RobotProgramNode;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -12,9 +12,14 @@ import util.ProgramNode;
  * The parser and interpreter. The top level parse function, a main method for testing, and several utility methods are provided. You need to implement parseProgram and all the rest of the parser.
  */
 public class Parser {
+
+	// Non-terminal nodes
+	public static Pattern CONDITION = Pattern.compile("and|or|not|lt|gt|eq");
+	public static Pattern SENSOR = Pattern.compile("fuelLeft|oppLR|oppFB|numBarrels|barrelLR|barrelFB|wallDist");
+	public static Pattern OPERATION = Pattern.compile("add|sub|mul|div");
+	public static Pattern ACTION = Pattern.compile("move|takeFuel|turnL|turnR|wait|turnAround|shieldOn|shieldOff");
 	
 	// Statement patterns
-	public static Pattern ACTION = Pattern.compile("move|takeFuel|turnL|turnR|wait|turnAround|shieldOn|shieldOff");
 	public static Pattern VAR  = Pattern.compile("\\$[A-Za-z][A-Za-z0-9]*");
 
 	// Logic patterns
@@ -33,7 +38,6 @@ public class Parser {
 	public static Pattern SHIELDOFF = Pattern.compile("shieldOff");
 	
 	// Condition nodes
-	public static Pattern CONDITION = Pattern.compile("and|or|not|lt|gt|eq");
 	public static Pattern LESSTHEN = Pattern.compile("lt");
 	public static Pattern GREATERTHEN = Pattern.compile("gt");
 	public static Pattern EQUAL = Pattern.compile("eq");
@@ -43,9 +47,16 @@ public class Parser {
 
 	// Expression nodes
 	public static Pattern NUMPAT = Pattern.compile("-?\\d+");  // ("-?(0|[1-9][0-9]*)");
-	public static Pattern SENSOR = Pattern.compile("fuelLeft|oppLR|oppFB|numBarrels|barrelLR|barrelFB|wallDist");
-	public static Pattern OPERATION = Pattern.compile("add|sub|mul|div");
 	
+	// Sensor nodes
+	public static Pattern FUELLEFT = Pattern.compile("fuelLeft");
+	public static Pattern OPPLR = Pattern.compile("oppLR");
+	public static Pattern OPPFB = Pattern.compile("oppFB");
+	public static Pattern NUMBARRELS = Pattern.compile("numBarrels");
+	public static Pattern BARRELLR = Pattern.compile("barrelLR");
+	public static Pattern BARRELFB = Pattern.compile("barrelFB");
+	public static Pattern WALLDIST = Pattern.compile("wallDist");
+
 	// Others utilitity patterns
 	public static Pattern SEMICOL = Pattern.compile(";");
 	public static Pattern OPENP = Pattern.compile("\\(");
@@ -57,14 +68,14 @@ public class Parser {
 	/**
 	 * Top level parse method, called by the World
 	 */
-	public static RobotNode parseFile(File code) {
+	public static RobotProgramNode parseFile(File code) {
 		Scanner scan = null;
 		try {
 			scan = new Scanner(code);
 			// the only time tokens can be next to each other is
 			// when one of them is one of (){},;
 			scan.useDelimiter("\\s+|(?=[{}(),;])|(?<=[{}(),;])");
-			RobotNode n = parseProgram(scan);  // You need to implement this!!!
+			RobotProgramNode n = parseProgram(scan);  // You need to implement this!!!
 			scan.close();
 			return n;
 		} catch (FileNotFoundException e) {
@@ -84,7 +95,7 @@ public class Parser {
 				File f = new File(arg);
 				if (f.exists()) {
 					System.out.println("Parsing '" + f + "'");
-					RobotNode prog = parseFile(f);
+					RobotProgramNode prog = parseFile(f);
 					System.out.println("Parsing completed ");
 					if (prog != null) {
 						System.out.println("================\nProgram:");
@@ -102,7 +113,7 @@ public class Parser {
 				if (res != JFileChooser.APPROVE_OPTION) {
 					break;
 				}
-				RobotNode prog = parseFile(chooser.getSelectedFile());
+				RobotProgramNode prog = parseFile(chooser.getSelectedFile());
 				System.out.println("Parsing completed");
 				if (prog != null) {
 					System.out.println("Program: \n" + prog);
@@ -115,9 +126,9 @@ public class Parser {
 
 	
 	/** PROG ::= STMT+ */
-	static RobotNode parseProgram(Scanner scan) {
+	static RobotProgramNode parseProgram(Scanner scan) {
 		
-		RobotNode programNode = null;
+		RobotProgramNode programNode = null;
 		if (scan != null){
 			programNode =  new ProgramNode().parse(scan);
 		}

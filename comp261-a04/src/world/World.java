@@ -1,6 +1,6 @@
 package world;
 
-import interfaces.RobotNode;
+import interfaces.RobotProgramNode;
 import java.awt.Point;
 import java.io.File;
 import java.util.Collections;
@@ -48,7 +48,7 @@ public class World {
     }
 
     public void loadRobotProgram(int id, File code){
-	RobotNode prog = Parser.parseFile(code);
+	RobotProgramNode prog = Parser.parseFile(code);
 	if (prog != null){
 	    System.out.println("Robot "+id+" now has program: ");
 	    System.out.println(prog);
