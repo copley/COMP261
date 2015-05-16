@@ -9,5 +9,4 @@ public interface RobotExpNode {
 
 	public RobotExpNode parse(Scanner scan);
 
-	public int getValue();
 }

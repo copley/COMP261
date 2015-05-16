@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 import java.util.regex.*;
 import javax.swing.JFileChooser;
-import util.ProgramNode;
+import core.ProgramNode;
 
 /**
  * The parser and interpreter. The top level parse function, a main method for testing, and several utility methods are provided. You need to implement parseProgram and all the rest of the parser.
@@ -18,12 +18,15 @@ public class Parser {
 	public static Pattern SENSOR = Pattern.compile("fuelLeft|oppLR|oppFB|numBarrels|barrelLR|barrelFB|wallDist");
 	public static Pattern OPERATION = Pattern.compile("add|sub|mul|div");
 	public static Pattern ACTION = Pattern.compile("move|takeFuel|turnL|turnR|wait|turnAround|shieldOn|shieldOff");
+	public static Pattern OP = Pattern.compile("add|sub|mul|div");
 	
 	// Statement patterns
 	public static Pattern VAR  = Pattern.compile("\\$[A-Za-z][A-Za-z0-9]*");
 
 	// Logic patterns
 	public static Pattern IF = Pattern.compile("if");
+	public static Pattern ELIF = Pattern.compile("elif");
+	public static Pattern ELSE = Pattern.compile("else");
 	public static Pattern LOOP = Pattern.compile("loop");
 	public static Pattern WHILE = Pattern.compile("while");
 	
@@ -45,8 +48,14 @@ public class Parser {
 	public static Pattern OR = Pattern.compile("or");
 	public static Pattern NOT = Pattern.compile("not");
 
-	// Expression nodes
-	public static Pattern NUMPAT = Pattern.compile("-?\\d+");  // ("-?(0|[1-9][0-9]*)");
+	// Expression nodes 
+//	public static Pattern NUM = Pattern.compile("-?\\d+");  
+	public static Pattern NUM = Pattern.compile("-?[0-9]+");
+	public static Pattern ADD = Pattern.compile("add");
+	public static Pattern SUB = Pattern.compile("sub");
+	public static Pattern MUL = Pattern.compile("mul");
+	public static Pattern DIV = Pattern.compile("div");
+
 	
 	// Sensor nodes
 	public static Pattern FUELLEFT = Pattern.compile("fuelLeft");
