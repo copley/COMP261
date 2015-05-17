@@ -24,13 +24,11 @@ public class StatmentNode implements RobotProgramNode {
 				nextNode = new IfNode();
 			} else if (scan.hasNext(Parser.WHILE)) {
 				nextNode = new WhileNode();
-				// } else if (scan.hasNext(Parser.ASSGN)){ // not sure htis is right .. double check if instead should be VAR = EXP
-				// nextNode = new AssgnNode();
+			} else if (scan.hasNext(Parser.VAR)){ 
+				 nextNode = new AssgnNode();
 			} else {
 				Parser.fail("Unkown statement", scan);
 			}
-			// finally, parse the node
-	//		nextNode = nextNode.parse(scan);
 			nextNode.parse(scan);
 			return this;
 		}

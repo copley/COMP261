@@ -9,20 +9,20 @@ import interfaces.RobotSensNode;
 public class OpponentFB implements RobotSensNode {
 
 	@Override
-	public int evaluate(Robot robot) {
-
-		return robot.getOpponentFB();
-	}
-
-	@Override
 	public RobotExpNode parse(Scanner scan) {
-
+	
 		// "oppFB"
 		if (!Parser.gobble(Parser.OPPFB, scan)) {
 			Parser.fail("FAIL: Expecting " + Parser.OPPFB.toString(), scan);
 		}
-
+	
 		return this;
+	}
+
+	@Override
+	public int evaluate(Robot robot) {
+
+		return robot.getOpponentFB();
 	}
 
 	@Override

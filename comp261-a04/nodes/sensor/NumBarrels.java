@@ -9,20 +9,20 @@ import interfaces.RobotSensNode;
 public class NumBarrels implements RobotSensNode {
 
 	@Override
-	public int evaluate(Robot robot) {
-
-		return robot.numBarrels();
-	}
-
-	@Override
 	public RobotExpNode parse(Scanner scan) {
-
+	
 		// "numBarrels"
 		if (!Parser.gobble(Parser.NUMBARRELS, scan)) {
 			Parser.fail("FAIL: Expecting " + Parser.NUMBARRELS.toString(), scan);
 		}
-
+	
 		return this;
+	}
+
+	@Override
+	public int evaluate(Robot robot) {
+
+		return robot.numBarrels();
 	}
 
 	@Override

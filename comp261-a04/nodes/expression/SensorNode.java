@@ -18,12 +18,6 @@ public class SensorNode implements RobotSensNode {
 	RobotSensNode sensorNode = null;
 	
 	@Override
-	public int evaluate(Robot robot) {
-	
-		return sensorNode.evaluate(robot);
-	}
-
-	@Override
 	public RobotSensNode parse(Scanner scan) {
 		if (scan.hasNext(Parser.FUELLEFT)){
 			sensorNode = new FuelLeftNode();
@@ -42,6 +36,12 @@ public class SensorNode implements RobotSensNode {
 		}
 		sensorNode.parse(scan);
 		return sensorNode;
+	}
+
+	@Override
+	public int evaluate(Robot robot) {
+	
+		return sensorNode.evaluate(robot);
 	}
 
 	@Override

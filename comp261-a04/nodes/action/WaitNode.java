@@ -13,21 +13,8 @@ public class WaitNode implements RobotProgramNode {
 	private int expValue = -1;
 
 	@Override
-	public void execute(Robot robot) {
-
-		if (expressionNode == null) {
-			robot.idleWait();
-		} else {
-			int expValue = expressionNode.evaluate(robot);
-			for (int i = 0; i < expValue; i++) {
-				robot.idleWait();
-			}
-		}
-	}
-
-	@Override
 	public RobotProgramNode parse(Scanner scan) {
-
+	
 		if (!Parser.gobble(Parser.WAIT, scan)) {
 			Parser.fail("FAIL: Expecting " + Parser.WAIT.toString(), scan);
 		}
@@ -44,6 +31,19 @@ public class WaitNode implements RobotProgramNode {
 			}
 		}
 		return this;
+	}
+
+	@Override
+	public void execute(Robot robot) {
+
+		if (expressionNode == null) {
+			robot.idleWait();
+		} else {
+			int expValue = expressionNode.evaluate(robot);
+			for (int i = 0; i < expValue; i++) {
+				robot.idleWait();
+			}
+		}
 	}
 
 	@Override

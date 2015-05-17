@@ -11,12 +11,6 @@ public class Expression implements RobotExpNode {
 	private RobotExpNode expressionNode = null;
 
 	@Override
-	public int evaluate(Robot robot) {
-
-		return expressionNode.evaluate(robot);
-	}
-
-	@Override
 	public RobotExpNode parse(Scanner scan) {
 
 		if (scan.hasNext(Parser.NUM)) {
@@ -32,6 +26,12 @@ public class Expression implements RobotExpNode {
 		}
 		expressionNode.parse(scan);
 		return expressionNode;
+	}
+
+	@Override
+	public int evaluate(Robot robot) {
+
+		return expressionNode.evaluate(robot);
 	}
 
 	@Override

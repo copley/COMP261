@@ -13,21 +13,8 @@ public class MoveNode implements RobotProgramNode {
 	private int expValue = -1;
 
 	@Override
-	public void execute(Robot robot) {
-
-		if (expressionNode != null) {
-			int expValue = expressionNode.evaluate(robot);
-			for (int i = 0; i < expValue; i++) {
-				robot.move();
-			}
-		} else {
-			robot.move();
-		}
-	}
-
-	@Override
 	public RobotProgramNode parse(Scanner scan) {
-
+	
 		// "move"
 		if (!Parser.gobble(Parser.MOVE, scan)) {
 			Parser.fail("FAIL: Expecting " + Parser.MOVE.toString(), scan);
@@ -37,7 +24,7 @@ public class MoveNode implements RobotProgramNode {
 		if (scan.hasNext(Parser.OPENP)) {
 			// has open parenthesis -> gobble "("
 			Parser.gobble(Parser.OPENP, scan);
-
+	
 			// "EXP"
 			expressionNode = new Expression();
 			expressionNode.parse(scan);
@@ -52,11 +39,24 @@ public class MoveNode implements RobotProgramNode {
 		return this;
 	}
 
+	@Override
+	public void execute(Robot robot) {
+
+		if (expressionNode != null) {
+			int expValue = expressionNode.evaluate(robot);
+			for (int i = 0; i < expValue; i++) {
+				robot.move();
+			}
+		} else {
+			robot.move();
+		}
+	}
+
 	public String toString() {
 
 		String s = "move";
 		if (expressionNode != null) {
-			s += String.format(" %d", expValue);
+			s += String.format(" %s", expressionNode.toString());
 		}
 		return s;
 	}

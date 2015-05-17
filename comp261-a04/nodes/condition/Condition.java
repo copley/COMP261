@@ -10,13 +10,8 @@ public class Condition implements RobotCondNode {
 	RobotCondNode conditionNode = null;
 
 	@Override
-	public boolean evaluate(Robot robot) {
-		return conditionNode.evaluate(robot);
-	}
-
-	@Override
 	public RobotCondNode parse(Scanner scan) {
-
+	
 		if (scan.hasNext(Parser.GREATERTHEN)) {
 			conditionNode = new GreaterThanNode();
 		} else if (scan.hasNext(Parser.LESSTHEN)) {
@@ -32,6 +27,11 @@ public class Condition implements RobotCondNode {
 		}
 		conditionNode.parse(scan);
 		return conditionNode;
+	}
+
+	@Override
+	public boolean evaluate(Robot robot) {
+		return conditionNode.evaluate(robot);
 	}
 
 	@Override

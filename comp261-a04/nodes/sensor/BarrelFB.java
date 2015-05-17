@@ -12,19 +12,8 @@ public class BarrelFB implements RobotSensNode {
 	private RobotExpNode expressionNode;
 
 	@Override
-	public int evaluate(Robot robot) {
-
-		if (expressionNode != null) {
-			int value = expressionNode.evaluate(robot);
-			return robot.getBarrelFB(value);
-		} else {
-			return robot.getClosestBarrelFB();
-		}
-	}
-
-	@Override
 	public RobotExpNode parse(Scanner scan) {
-
+	
 		// "barrelFB"
 		if (!Parser.gobble(Parser.BARRELFB, scan)) {
 			Parser.fail("FAIL: Expecting " + Parser.BARRELFB.toString(), scan);
@@ -44,6 +33,17 @@ public class BarrelFB implements RobotSensNode {
 			}
 		}
 		return this;
+	}
+
+	@Override
+	public int evaluate(Robot robot) {
+
+		if (expressionNode != null) {
+			int value = expressionNode.evaluate(robot);
+			return robot.getBarrelFB(value);
+		} else {
+			return robot.getClosestBarrelFB();
+		}
 	}
 
 	@Override

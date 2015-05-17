@@ -4,10 +4,10 @@ package expression;
 import interfaces.RobotExpNode;
 import interfaces.RobotSensNode;
 import java.util.Scanner;
-import op.AddNode;
-import op.DivNode;
-import op.MulNode;
-import op.SubNode;
+import operation.AddNode;
+import operation.DivNode;
+import operation.MulNode;
+import operation.SubNode;
 import parser.Parser;
 import robot.Robot;
 
@@ -18,6 +18,7 @@ public class OpNode implements RobotExpNode {
 	
 	@Override
 	public RobotExpNode parse(Scanner scan) {
+
 		if (scan.hasNext(Parser.ADD)){
 			opNode = new AddNode();
 		} else if (scan.hasNext(Parser.SUB)){

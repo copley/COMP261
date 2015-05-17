@@ -9,19 +9,19 @@ import interfaces.RobotSensNode;
 public class WallDist implements RobotSensNode {
 
 	@Override
-	public int evaluate(Robot robot) {
-		return robot.getDistanceToWall();
-	}
-
-	@Override
 	public RobotExpNode parse(Scanner scan) {
-
+	
 		// "wallDist"
 		if (!Parser.gobble(Parser.WALLDIST, scan)) {
 			Parser.fail("FAIL: Expecting " + Parser.WALLDIST.toString(), scan);
 		}
-
+	
 		return this;
+	}
+
+	@Override
+	public int evaluate(Robot robot) {
+		return robot.getDistanceToWall();
 	}
 
 	@Override

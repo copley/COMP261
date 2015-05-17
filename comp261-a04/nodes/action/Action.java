@@ -10,12 +10,6 @@ public class Action implements RobotProgramNode {
 	RobotProgramNode actionNode = null;
 
 	@Override
-	public void execute(Robot robot) {
-
-		actionNode.execute(robot);
-	}
-
-	@Override
 	public RobotProgramNode parse(Scanner scan) {
 
 		// creates an action node then parse it to the scnner
@@ -38,13 +32,21 @@ public class Action implements RobotProgramNode {
 		} else {
 			Parser.fail("Invalid action node", scan);
 		}
-		actionNode.parse(scan); // parse then gobble ";"
+		actionNode.parse(scan);
+		
+		// ";"
 		if (!Parser.gobble(Parser.SEMICOL, scan)) {
 			Parser.fail("Expecting ;", scan);
 		}
 		return actionNode;
 	}
 	
+	@Override
+	public void execute(Robot robot) {
+	
+		actionNode.execute(robot);
+	}
+
 	public String toString(){
 		String s = actionNode.toString()+";";
 		return s;

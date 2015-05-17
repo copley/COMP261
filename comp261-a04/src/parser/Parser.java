@@ -22,13 +22,12 @@ public class Parser {
 	
 	// Statement patterns
 	public static Pattern VAR  = Pattern.compile("\\$[A-Za-z][A-Za-z0-9]*");
-
-	// Logic patterns
+	public static Pattern ASSIGN  = Pattern.compile("\\=");
+	public static Pattern LOOP = Pattern.compile("loop");
 	public static Pattern IF = Pattern.compile("if");
+	public static Pattern WHILE = Pattern.compile("while");
 	public static Pattern ELIF = Pattern.compile("elif");
 	public static Pattern ELSE = Pattern.compile("else");
-	public static Pattern LOOP = Pattern.compile("loop");
-	public static Pattern WHILE = Pattern.compile("while");
 	
 	// Action patterns
 	public static Pattern MOVE = Pattern.compile("move");
@@ -49,7 +48,6 @@ public class Parser {
 	public static Pattern NOT = Pattern.compile("not");
 
 	// Expression nodes 
-//	public static Pattern NUM = Pattern.compile("-?\\d+");  
 	public static Pattern NUM = Pattern.compile("-?[0-9]+");
 	public static Pattern ADD = Pattern.compile("add");
 	public static Pattern SUB = Pattern.compile("sub");

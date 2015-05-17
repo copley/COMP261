@@ -33,6 +33,7 @@ public class GreaterThanNode implements RobotCondNode {
 		if (!Parser.gobble(",", scan)) {
 			Parser.fail("FAIL: Expecting \",\"", scan);
 		}
+		
 		// "EXP"
 		expNode2 = new Expression();
 		expNode2.parse(scan);
@@ -48,6 +49,7 @@ public class GreaterThanNode implements RobotCondNode {
 	public boolean evaluate(Robot robot) {
 
 		if (expNode1.evaluate(robot) > expNode2.evaluate(robot)) {
+
 			return true;
 		}
 		return false;
