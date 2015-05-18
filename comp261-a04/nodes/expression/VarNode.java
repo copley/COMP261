@@ -4,6 +4,7 @@ import interfaces.RobotExpNode;
 import java.util.Scanner;
 import core.ProgramNode;
 import parser.Parser;
+import parser.ParserFailureException;
 import robot.Robot;
 
 public class VarNode implements RobotExpNode {
@@ -15,63 +16,60 @@ public class VarNode implements RobotExpNode {
 
 		
 		if (scan.hasNext(Parser.VAR)) {
+			
+			// CHALLENGE I:
 			varName = scan.next();
 			
-//			if (!ProgramNode.variables.containsKey(this)) {
-//				Parser.fail(String.format("Variable not initialised: %s", varName), scan);
-//			}
 			/*
 			// CHALLENGE II: check if top layer of stack contains our variable
-			if (!ProgramNode.varStack.peek().containsKey(this)) {
+			if (!ProgramNode.varStack.peek().containsKey(varName)) {
 				Parser.fail(String.format("Variable not initialised: %s", varName), scan);
 			}
 			*/
 		}
 		return null;
 	}
-	
+
 	public RobotExpNode parseInit(Scanner scan) {
 
 		if (scan.hasNext(Parser.VAR)) {
+
 			varName = scan.next();
-		} else {
-			Parser.fail(String.format("Variable name not valid"), scan);
 		}
+
 		return null;
 	}
 
 	@Override
 	public Integer evaluate(Robot robot) {
-
-		// CHALLENGE I
-//		System.out.println("This variable: " + ProgramNode.variables.get(this).evaluate(robot));
-//		System.out.println(ProgramNode.variables.size());
 		
-//		for (VarNode key : ProgramNode.variables.keySet()){
-//			if (key.toString().equals(varName)){
-//				// this value is re defined
-//				RobotExpNode tmp = ProgramNode.variables.get(key);
-//				ProgramNode.variables.remove(key);
-//				ProgramNode.variables.put(key, tmp);
-//				return tmp.evaluate(robot);
-//			}
-//		}
-		System.out.println("#####");
-		System.out.println(ProgramNode.variables.get(varName));
+		// CHALLENGE I:
+		if (ProgramNode.variables.containsKey(varName.toString())){ // if key is present
 		return (Integer) ProgramNode.variables.get(varName).evaluate(robot);
-		
-//		return 0;
-		
-//		return ProgramNode.variables.get(this).evaluate(robot);
+		} else {
+			throw new ParserFailureException("Variable not valid");
+		}
 
 		/*
 		// CHALLENGE II: retrve the variables in the top layer of the stack
-		System.out.println("dsddssdds");
-		System.out.println(ProgramNode.varStack.peek().size());
-		System.out.println("dsddssdds");
-//		return ProgramNode.varStack.peek().get(this).evaluate(robot);
-		return 1;
+		
+		Map<String, RobotExpNode> tmpMap = ProgramNode.varStack.peek();
+		
+		if (tmpMap.containsKey(varName.toString())){ // if key is present
+			RobotExpNode tmpExp = tmpMap.get(varName.toString());
+			Integer eval = tmpExp.evaluate(robot);
+			tmpMap.put(varName.toString(), new NumberNode(eval));
+			ProgramNode.varStack.pop();
+			ProgramNode.varStack.push(tmpMap);
+			return eval;
+		} else {
+			// key not found ... should look at upper stack ? 
+			System.out.println("KEY NOT FOUND // THIS SHOULD NOT HAPPEN");
+			// get it form variables 
+			return (Integer) ProgramNode.variables.get(varName).evaluate(robot);
+		}
 		*/
+		
 	}
 
 	@Override
@@ -79,7 +77,7 @@ public class VarNode implements RobotExpNode {
 		return varName;
 	}
 
-//	@Override
+//	@Override // was used when map had to compare between varNodes rather than strings
 //	public boolean equals(Object o){
 //		if(o instanceof VarNode){
 //			if(((VarNode) o).toString().equals(varName) ){

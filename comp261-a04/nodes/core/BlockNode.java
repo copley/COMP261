@@ -1,13 +1,9 @@
 package core;
 
-import interfaces.RobotExpNode;
 import interfaces.RobotProgramNode;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import expression.VarNode;
 import parser.Parser;
 import robot.Robot;
 
@@ -22,13 +18,13 @@ public class BlockNode implements RobotProgramNode {
 
 		/*
 		// CHALLENGE II: Makes a copy of the top layer of the stack to localise any variable inside the block
-		Map<VarNode, RobotExpNode> tmpVars = ProgramNode.varStack.peek();
-		Map<VarNode, RobotExpNode> tmpVarsCopy = new HashMap<VarNode, RobotExpNode>();
-		for (VarNode key : tmpVars.keySet()) {
+		Map<String, RobotExpNode> tmpVars = ProgramNode.varStack.peek();
+		Map<String, RobotExpNode> tmpVarsCopy = new HashMap<String, RobotExpNode>();
+		for (String key : tmpVars.keySet()) {
 			tmpVarsCopy.put(key, tmpVars.get(key));
 		}
 		ProgramNode.varStack.push(tmpVarsCopy);
-		*/
+		 */
 
 		// "{"
 		if (!Parser.gobble(Parser.OPENBRACE, scan)) {
