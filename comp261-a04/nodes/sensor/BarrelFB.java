@@ -36,7 +36,7 @@ public class BarrelFB implements RobotSensNode {
 	}
 
 	@Override
-	public int evaluate(Robot robot) {
+	public Integer evaluate(Robot robot) {
 
 		if (expressionNode != null) {
 			int value = expressionNode.evaluate(robot);

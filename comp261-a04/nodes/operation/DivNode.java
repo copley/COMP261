@@ -48,7 +48,7 @@ public class DivNode implements RobotSensNode {
 	}
 
 	@Override
-	public int evaluate(Robot robot) {
+	public Integer evaluate(Robot robot) {
 
 		val1 = expNode1.evaluate(robot);
 		val2 = expNode2.evaluate(robot);

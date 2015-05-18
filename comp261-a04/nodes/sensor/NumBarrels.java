@@ -20,7 +20,7 @@ public class NumBarrels implements RobotSensNode {
 	}
 
 	@Override
-	public int evaluate(Robot robot) {
+	public Integer evaluate(Robot robot) {
 
 		return robot.numBarrels();
 	}

@@ -1,0 +1,25 @@
+\documentclass[11pt, oneside]{article} % letter, article, report
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+
+\title{Comp 261 A04 Report}
+\author{Diego Trazzi}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\maketitle
+This assignment has been rather challenging but I relive I have accomplished most of the requirements. In the following section I will discuss details about the code and list few bugs which I have identified thought the process of testing and coding.
+\section{Code implementation}
+To implement a parser is necessary to have a set of grammar rules. The more strict and precise is the grammar the easier is to implement the parser. 
+For this assignment I have implemented a simple parser with prefix notation.\\
+Throughout the process of writing code blocks I have utilised the programs provided to check the validity of the implementation.
+%\subsection{}
+\section{Challenges}
+\begin{itemize}
+\item For the initial challenge (up to 95) I have implemented in the parser a map to store local variables declared at runtime, so that I can then check if the variable is been assigned or if is not been initialised and throw a parser fail message..
+\item Successively, I have implemented the local scope for variables (up to 100). To achieve this I have added a stack of maps (VarNode, RoborExprNode) so that I could then add a new layer at each occurrence of a block, and remove that layer at the end of a bloc, and rely on the implicit structure of a stack (FIFO). This implementation was then tested on a simple program which check for local and global variables.
+\end{itemize}
+\end{document}

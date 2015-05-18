@@ -8,7 +8,15 @@ import robot.Robot;
 
 public class NumberNode implements RobotExpNode {
 
-	private int value = -1;
+	private int value;
+	
+	public NumberNode(int value){
+		this.value = value;
+	}
+	
+	public NumberNode(){
+		this.value = -1;
+	}
 
 	@Override
 	public RobotExpNode parse(Scanner scan) {
@@ -24,7 +32,7 @@ public class NumberNode implements RobotExpNode {
 	}
 
 	@Override
-	public int evaluate(Robot robot) {
+	public Integer evaluate(Robot robot) {
 
 		return value;
 

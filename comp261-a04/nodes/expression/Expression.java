@@ -29,7 +29,7 @@ public class Expression implements RobotExpNode {
 	}
 
 	@Override
-	public int evaluate(Robot robot) {
+	public Integer evaluate(Robot robot) {
 
 		return expressionNode.evaluate(robot);
 	}

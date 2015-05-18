@@ -33,7 +33,7 @@ public class OpNode implements RobotExpNode {
 	}
 	
 	@Override
-	public int evaluate(Robot robot) {
+	public Integer evaluate(Robot robot) {
 	
 		return opNode.evaluate(robot);
 	}

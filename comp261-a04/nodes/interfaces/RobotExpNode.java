@@ -5,7 +5,7 @@ import robot.Robot;
 
 public interface RobotExpNode {
 
-	public int evaluate(Robot robot);
+	public Integer evaluate(Robot robot);
 
 	public RobotExpNode parse(Scanner scan);
 
