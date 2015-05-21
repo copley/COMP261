@@ -1,6 +1,9 @@
 package logic;
 
+import interfaces.RobotExpNode;
 import interfaces.RobotProgramNode;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import condition.Condition;
 import core.BlockNode;
@@ -21,7 +24,7 @@ public class WhileNode implements RobotProgramNode {
 			Parser.fail("FAIL: Expecting: " + Parser.WHILE.toString(), scan);
 		}
 
-		/*
+//		/*
 		// CHALLENGE II: Makes a copy of the top layer of the stack to localise any variable inside the block
 		Map<String, RobotExpNode> tmpVars = ProgramNode.varStack.peek();
 		Map<String, RobotExpNode> tmpVarsCopy = new HashMap<String, RobotExpNode>();
@@ -29,7 +32,7 @@ public class WhileNode implements RobotProgramNode {
 			tmpVarsCopy.put(key, tmpVars.get(key));
 		}
 		ProgramNode.varStack.push(tmpVarsCopy);
-		*/
+//		*/
 		
 		
 		// "("

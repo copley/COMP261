@@ -1,6 +1,7 @@
 package expression;
 
 import interfaces.RobotExpNode;
+import java.util.Map;
 import java.util.Scanner;
 import core.ProgramNode;
 import parser.Parser;
@@ -14,18 +15,16 @@ public class VarNode implements RobotExpNode {
 	@Override
 	public RobotExpNode parse(Scanner scan) {
 
-		
 		if (scan.hasNext(Parser.VAR)) {
-			
-			// CHALLENGE I:
+
 			varName = scan.next();
-			
-			/*
+
+			// /*
 			// CHALLENGE II: check if top layer of stack contains our variable
 			if (!ProgramNode.varStack.peek().containsKey(varName)) {
-				Parser.fail(String.format("Variable not initialised: %s", varName), scan);
+				Parser.fail(String.format("Variable not initialised or out of scope: %s", varName), scan);
 			}
-			*/
+			// */
 		}
 		return null;
 	}
@@ -42,20 +41,18 @@ public class VarNode implements RobotExpNode {
 
 	@Override
 	public Integer evaluate(Robot robot) {
-		
-		// CHALLENGE I:
-		if (ProgramNode.variables.containsKey(varName.toString())){ // if key is present
-		return (Integer) ProgramNode.variables.get(varName).evaluate(robot);
-		} else {
-			throw new ParserFailureException("Variable not valid");
-		}
 
 		/*
+		 * // CHALLENGE I: if (ProgramNode.variables.containsKey(varName.toString())){ // if key is present return (Integer)
+		 * ProgramNode.variables.get(varName).evaluate(robot); } else { throw new ParserFailureException("Variables must be declared before being used !"); }
+		 */
+
+		// /*
 		// CHALLENGE II: retrve the variables in the top layer of the stack
-		
+
 		Map<String, RobotExpNode> tmpMap = ProgramNode.varStack.peek();
-		
-		if (tmpMap.containsKey(varName.toString())){ // if key is present
+
+		if (tmpMap.containsKey(varName.toString())) { // if key is present
 			RobotExpNode tmpExp = tmpMap.get(varName.toString());
 			Integer eval = tmpExp.evaluate(robot);
 			tmpMap.put(varName.toString(), new NumberNode(eval));
@@ -63,32 +60,17 @@ public class VarNode implements RobotExpNode {
 			ProgramNode.varStack.push(tmpMap);
 			return eval;
 		} else {
-			// key not found ... should look at upper stack ? 
+			// key not found ... should look at upper stack ?
 			System.out.println("KEY NOT FOUND // THIS SHOULD NOT HAPPEN");
-			// get it form variables 
+			// get it form variables
 			return (Integer) ProgramNode.variables.get(varName).evaluate(robot);
 		}
-		*/
-		
+		// */
+
 	}
 
 	@Override
-	public String toString(){
+	public String toString() {
 		return varName;
 	}
-
-//	@Override // was used when map had to compare between varNodes rather than strings
-//	public boolean equals(Object o){
-//		if(o instanceof VarNode){
-//			if(((VarNode) o).toString().equals(varName) ){
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-
-//	@Override
-//	public int hashCode(){
-//		return toString().hashCode();
-//	}
 }

@@ -22,12 +22,12 @@ public class AssgnNode implements RobotProgramNode {
 		variable = new VarNode();
 		
 		// CHALLENGE I:
-		variable.parse(scan);
+//		variable.parse(scan);
 
-		/*
+//		/*
 		// CHALLENGE II : 
 		variable.parseInit(scan);
-		 */
+//		 */
 
 		// "="
 		if (!Parser.gobble(Parser.ASSIGN, scan)) {
@@ -64,9 +64,9 @@ public class AssgnNode implements RobotProgramNode {
 	public void execute(Robot robot) {
 		
 		// CHALLENGE I:
-		ProgramNode.variables.put(variable.toString(), new NumberNode(expNode.evaluate(robot)));
+//		ProgramNode.variables.put(variable.toString(), new NumberNode(expNode.evaluate(robot)));
 
-		/*
+//		/*
 		// CHALLENGE II: take variable out of stack, execute it, and put back
 		if (ProgramNode.varStack.size() > 0) {
 			Map<String, RobotExpNode> tmpMap = ProgramNode.varStack.peek();
@@ -90,7 +90,7 @@ public class AssgnNode implements RobotProgramNode {
 		} else {
 			System.out.println("EMPTY STACK");
 		}
-		*/
+//		*/
 		
 	}
 		
