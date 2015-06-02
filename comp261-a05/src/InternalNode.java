@@ -17,11 +17,13 @@ public class InternalNode<K, C> implements Node<K, C> {
 	@Override
 	public void addChild(C c) {
 		children.add(c);
+		size++;
 	}
 
 	@Override
 	public void addKey(K k) {
 		keys.add(k);
+//		size++;
 	}
 
 	@Override
@@ -42,17 +44,6 @@ public class InternalNode<K, C> implements Node<K, C> {
 	@Override
 	public void setSize(int s) {
 		size = s;
-	}
-
-	@Override
-	public K removeKey(int i) {
-		return keys.remove(i);
-	}
-
-	@Override
-	public C removeChild(int i) {
-		size--;
-		return children.remove(i);
 	}
 
 	@Override
@@ -78,4 +69,14 @@ public class InternalNode<K, C> implements Node<K, C> {
 		keys.set(i, k);
 	}
 
+	 @Override
+	 public K removeKey(int i) {
+	 return keys.remove(i);
+	 }
+	
+	 @Override
+	 public C removeChild(int i) {
+	 size--;
+	 return children.remove(i);
+	 }
 }
