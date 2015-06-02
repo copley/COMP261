@@ -1,29 +1,26 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class LeafNode<V> implements Node {
+public class LeafNode<K, C> implements Node<K, C> {
 
-	private List<Integer> keys;
-	private List<V> values;
+	private List<K> keys;
+	private List<C> children;
 	private int size;
-	private Node next;
+	private C next;
 
 	public LeafNode() {
-		keys = new ArrayList<Integer>();
-		values = new ArrayList<V>();
-	}
-
-	// @Override
-	public void addValue(V v) {
-		values.add(v);
+		keys = new ArrayList<K>();
+		children = new ArrayList<C>();
 	}
 
 	@Override
-	public void addKey(Integer k) {
-		// add value in correct place .....
+	public void addChild(C c) {
+		children.add(c);
+	}
+
+	@Override
+	public void addKey(K k) {
 		keys.add(k);
-		Collections.sort(keys);
 		size++;
 	}
 
@@ -32,13 +29,13 @@ public class LeafNode<V> implements Node {
 		return size;
 	}
 
-	// @Override
-	public V getValue(int i) {
-		return values.get(i);
+	@Override
+	public C getChild(int i) {
+		return children.get(i);
 	}
 
-	// @Override
-	public int getKey(int i) {
+	@Override
+	public K getKey(int i) {
 		return keys.get(i);
 	}
 
@@ -48,37 +45,37 @@ public class LeafNode<V> implements Node {
 	}
 
 	@Override
-	public Integer removeKey(int i) {
+	public K removeKey(int i) {
 		size--;
 		return keys.remove(i);
 	}
 
-	// @Override
-	public V removeValue(int i) {
-		return values.remove(i);
+	@Override
+	public C removeChild(int i) {
+		return children.remove(i);
 	}
 
-	// @Override
-	public void setNext(Node n) {
-		next = n;
+	@Override
+	public void setNext(C c) {
+		next = c;
 	}
 
-	// @Override
-	public Node getNext() {
+	@Override
+	public C getNext() {
 		return next;
 	}
 
-	// @Override
-	public void addValue(V c, int i) {
-		values.set(i, c);
+	@Override
+	public void addChild(C c, int i) {
+		children.set(i, c);
 	}
 
-	// @Override
-	// public void addKey(Integer k, int i) {
-	// if(i>= size){
-	// size++;
-	// }
-	// keys.set(i, k);
-	// }
+	@Override
+	public void addKey(K k, int i) {
+		if (i >= size) {
+			size++;
+		}
+		keys.set(i, k);
+	}
 
 }

@@ -1,53 +1,42 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class InternalNode implements Node {
+public class InternalNode<K, C> implements Node<K, C> {
 
-	private List<Integer> keys;
-	private List<Node> children;
+	public List<K> keys;
+	private List<C> children;
 	private int size;
-	private Node next;
+	private C next;
 
 	public InternalNode() {
-		keys = new ArrayList<Integer>();
-		children = new ArrayList<Node>();
-	}
-
-//	@Override
-	public void addChild(Node c) {
-		children.add(c);
-		size++;
+		keys = new ArrayList<K>();
+		keys.add(null);
+		children = new ArrayList<C>();
 	}
 
 	@Override
-	public void addKey(Integer k) {
+	public void addChild(C c) {
+		children.add(c);
+	}
+
+	@Override
+	public void addKey(K k) {
 		keys.add(k);
 	}
 
-//	@Override
-	public void addKey(Integer k, int indx) {
-		if (indx >= size) {
-			size++;
-		}
-		keys.set(indx, k);
-	}
-	
 	@Override
 	public int size() {
 		return size;
 	}
 
-//	@Override
-	public Node getChild(int i) {
+	@Override
+	public C getChild(int i) {
 		return children.get(i);
 	}
 
-//	@Override
-	public int getKey(int i) {
-		if (keys.size() > 0){
-			return (int) keys.get(i);
-		}
-		return 0;
+	@Override
+	public K getKey(int i) {
+		return keys.get(i);
 	}
 
 	@Override
@@ -56,30 +45,37 @@ public class InternalNode implements Node {
 	}
 
 	@Override
-	public Integer removeKey(int i) {
+	public K removeKey(int i) {
 		return keys.remove(i);
 	}
 
-//	@Override
-	public Node removeChild(int i) {
+	@Override
+	public C removeChild(int i) {
 		size--;
 		return children.remove(i);
 	}
 
-//	@Override
-	public void setNext(Node n) {
-		next = n;
+	@Override
+	public void setNext(C c) {
+		next = c;
 	}
 
-//	@Override
-	public Node getNext() {
+	@Override
+	public C getNext() {
 		return next;
 	}
 
-//	@Override
-	public void addChild(Node c,int indx) {
-		children.set(indx, c);
+	@Override
+	public void addChild(C c, int i) {
+		children.set(i, c);
 	}
 
+	@Override
+	public void addKey(K k, int i) {
+		if (i >= size) {
+			size++;
+		}
+		keys.set(i, k);
+	}
 
 }
