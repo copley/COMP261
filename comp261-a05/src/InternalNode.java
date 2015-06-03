@@ -80,4 +80,16 @@ public class InternalNode<K, C> implements Node<K, C> {
 	 size--;
 	 return children.remove(i);
 	 }
+	
+	@Override
+	public String toString() {
+		return "BPlusStringInternalNode [" + "\tsize=" + size + ", " + "\n\tkeys=" + keys + "," + "\n\tchild=" + children + "]";
+	}
+
+	@Override
+	public void addKV(K k, C c) {
+		throw new InvalidOperation(null);
+		// TODO Auto-generated method stub
+		
+	}
 }

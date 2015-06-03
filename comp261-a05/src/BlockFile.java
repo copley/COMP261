@@ -7,7 +7,6 @@
 import java.util.*;
 import java.io.*;
 
-
 /** BlockFile
   * Manages a random access file that can only be read and written to as
   *  fixed size blocks of bytes.

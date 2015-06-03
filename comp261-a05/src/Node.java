@@ -1,3 +1,5 @@
+import java.util.List;
+
 public interface Node<K, C> {
 
 	/**
@@ -67,4 +69,7 @@ public interface Node<K, C> {
 	public void setNext(C c);
 
 	public C getNext();
+	
+	public void addKV(K k, C c);
+	
 }

@@ -1,33 +1,73 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
+import javax.management.openmbean.InvalidOpenTypeException;
 
-public class LeafNode<K, C> implements Node<K, C> {
+public class LeafNode<K extends Comparable<K>, V> implements Node<K, V> {
 
 	 private List<K> keys;
-	 private List<C> children;
-	TreeMap<K, C> map;
-	private int size;
-	private C next;
+	 private List<V> values;
+	 private int size = 0;
+	 private V next = null;
+	 private Map<K, V> keyValues = new TreeMap<K, V>();
 
 	public LeafNode() {
-		map = new TreeMap<K, C>();
 		 keys = new ArrayList<K>();
-		 children = new ArrayList<C>();
-
+		 values = new ArrayList<V>();
 	}
-
+	
 	@Override
-	public void addChild(C c) {
-//		map.put(K, C);
-		children.add(c);
+	public void addChild(V v) {
+		throw new InvalidOpenTypeException();
+//		values.add(v);
 	}
 
 	@Override
 	public void addKey(K k) {
-		keys.add(k);
-		size++;
+		throw new InvalidOpenTypeException();
+//		keys.add(k);
+//		size++;
 	}
+	
+//	public void addKV(K k , V v){
+//		if (size == 0 ){ // if the node is empty
+//			keys.add(k);
+//			values.add(v);
+//			size++;
+//			System.out.println("EMPTY NODE ADDING FIRST VAL\n");
+//			return;
+//		} else {
+//			for (int i = 0; i < size; i++){
+//				int cmp = k.compareTo(keys.get(i));
+//				if (cmp < 0) { // value is smaller than node -> insert one before
+//					keys.add(size-1, k);
+//					values.add(size-1, v);
+//					size++;
+//					System.out.println("ADDED KEY/VALUE at: "+i+"\n");
+//					return;
+//				}
+//			}
+//		}
+//	}
+	
+	
+//	public void moveValues(LeafNode<K,V> sibling, Integer mid, Integer end) {
+//		List<String> keys = getKeys();
+//		for(int i = end - 1; i >= mid; i--) {
+//			String key = keys.get(i);
+//			sibling.addKeyValue(key, keyValues.get(key));
+//			keyValues.remove(key);
+//			size = size - 1;
+//		}
+//	}
+	
+	
+	public void addKV(K key, V value) {
+		keyValues.put(key, value);
+			size=size+1;
+		}
+	
 
 	@Override
 	public int size() {
@@ -35,8 +75,8 @@ public class LeafNode<K, C> implements Node<K, C> {
 	}
 
 	@Override
-	public C getChild(int i) {
-		return children.get(i);
+	public V getChild(int i) {
+		return values.get(i);
 	}
 
 	@Override
@@ -45,7 +85,7 @@ public class LeafNode<K, C> implements Node<K, C> {
 	}
 
 	@Override
-	public void setNext(C c) {
+	public void setNext(V c) {
 		next = c;
 	}
 
@@ -55,13 +95,13 @@ public class LeafNode<K, C> implements Node<K, C> {
 	}
 
 	@Override
-	public C getNext() {
+	public V getNext() {
 		return next;
 	}
 
 	@Override
-	public void addChild(C c, int i) {
-		children.set(i, c);
+	public void addChild(V c, int i) {
+		values.set(i, c);
 	}
 
 	@Override
@@ -74,13 +114,32 @@ public class LeafNode<K, C> implements Node<K, C> {
 
 	@Override
 	public K removeKey(int i) {
-		size--;
-		return keys.remove(i);
+		int j = 0;
+		for (K key : keyValues.keySet()){
+			j++;
+			if (i == j){
+				keyValues.remove(key);
+				size--;
+				return key;
+			}
+		}
+		return null;
 	}
 
 	@Override
-	public C removeChild(int i) {
-		return children.remove(i);
+	public V removeChild(int i) {
+		int j = 0;
+		for (K key : keyValues.keySet()){
+			j++;
+			if (i == j){
+				V tmp = keyValues.get(key);
+				keyValues.remove(key);
+				size--;
+				return tmp;
+			}
+		}
+		return null;
 	}
+
 
 }

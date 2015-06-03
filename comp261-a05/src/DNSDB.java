@@ -38,7 +38,7 @@ public class DNSDB {
 				String[] pair = line.split("\t");
 				String host = pair[0];
 				int IP = stringToIP(pair[1]);
-				System.out.println(String.format("Adding hostname %d \t %s",IP,host));
+				System.out.println(String.format("Adding hostname %s \t %s",IPToString(IP),host));
 				hostNames.put(IP, host);
 //				ipAddresses.put(host, IP);
 			}
