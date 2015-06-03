@@ -174,7 +174,8 @@ public class DNSDB {
 	public static String IPToString(int ip) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 3; i >= 0; i--) {
-			sb.append((ip & (0xFF << (i * 8))) >> (i * 8));
+//			sb.append((ip & (0xFF << (i * 8))) >> (i * 8));
+			sb.append((ip >> (i*8)) & 0xFF);
 			if (i > 0) sb.append('.');
 		}
 		return sb.toString();

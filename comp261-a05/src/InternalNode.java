@@ -16,14 +16,15 @@ public class InternalNode<K, C> implements Node<K, C> {
 
 	@Override
 	public void addChild(C c) {
+		/// add index to add child so can be added in right place
 		children.add(c);
-		size++;
+//		size++;
 	}
 
 	@Override
 	public void addKey(K k) {
 		keys.add(k);
-//		size++;
+		size++;
 	}
 
 	@Override
